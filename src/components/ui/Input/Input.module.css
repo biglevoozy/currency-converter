@@ -1,0 +1,31 @@
+.input {
+  padding: 12px 24px;
+
+  width: 100%;
+
+  border: 0;
+  border-bottom: 1px solid var(--gray-700);
+  outline: 0;
+
+  font-size: 1.5rem;
+
+  background-color: transparent;
+  color: var(--white-main);
+
+  font-family: var(--font-family);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media (max-width: 580px) {
+  .input {
+    font-size: 1.2rem;
+
+    padding: 8px 8px;
+    margin: 0 4px;
+  }
+}
