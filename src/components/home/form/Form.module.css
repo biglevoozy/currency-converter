@@ -1,0 +1,35 @@
+.form {
+  min-width: 300px;
+  width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  position: relative;
+}
+
+.row {
+  display: flex;
+  align-items: end;
+
+  position: relative;
+}
+
+.swapBtn {
+  position: absolute;
+  z-index: 1;
+  right: 6px;
+  bottom: 20px;
+}
+
+@media (max-width: 580px) {
+  .form {
+    gap: 12px;
+  }
+
+  .swapBtn {
+    bottom: 20px;
+    right: -3px;
+  }
+}
