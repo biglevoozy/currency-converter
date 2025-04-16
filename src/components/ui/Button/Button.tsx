@@ -3,14 +3,26 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './Button.module.css';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: ReactNode;
-  onClick: () => void;
+  text?: string;
+  icon?: ReactNode;
+  active?: boolean;
+  onClick?: () => void;
 }
 
-const Button = ({ icon, onClick, ...rest }: ButtonProps) => {
+const Button = ({
+  icon,
+  text,
+  onClick,
+  active = false,
+  ...rest
+}: ButtonProps) => {
   return (
-    <button className={styles.btn} onClick={onClick} {...rest}>
-      {icon}
+    <button
+      className={`${styles.btn} ${active ? styles.active : ''}`}
+      onClick={onClick}
+      {...rest}
+    >
+      {icon || text}
     </button>
   );
 };

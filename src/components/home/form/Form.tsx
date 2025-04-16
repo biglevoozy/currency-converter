@@ -1,4 +1,5 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { api } from 'src/api/api';
 import Button from 'src/components/ui/Button/Button';
 import Input from 'src/components/ui/Input/Input';
 import Select from 'src/components/ui/Select/Select';
@@ -8,18 +9,32 @@ import SwapIcon from './arrowSwap.svg?react';
 
 import styles from './Form.module.css';
 
-const EXCHANGE_CURRENCIES = ['eur', 'mdl', 'usd', 'rub'];
-
 interface FormProps {
   formValues: FormValues;
+  exchangeRate: number;
   onChange: (name: string, value: string) => void;
   handleSwapCurrencies: () => void;
 }
 
-const Form = ({ formValues, onChange, handleSwapCurrencies }: FormProps) => {
-  const convertedValue = (
-    formValues.billsQuantity * formValues.exchangeRate
-  ).toFixed(2);
+const Form = ({
+  formValues,
+  exchangeRate,
+  onChange,
+  handleSwapCurrencies,
+}: FormProps) => {
+  const convertedValue = (formValues.billsQuantity * exchangeRate).toFixed(2);
+
+  const [exchangeCurrencies, setExchangeCurrencies] = useState<
+    [string, string][]
+  >([]);
+
+  useEffect(() => {
+    api.getAvailableCurrencies().then((data) => {
+      if (typeof data !== 'undefined') {
+        setExchangeCurrencies(data);
+      }
+    });
+  }, []);
 
   const handleChange = (
     name: string,
@@ -36,6 +51,7 @@ const Form = ({ formValues, onChange, handleSwapCurrencies }: FormProps) => {
           value={formValues.billsQuantity}
           onChange={(e) => handleChange('billsQuantity', e)}
           type="number"
+          placeholder="Enter amount"
         />
 
         <Select
@@ -43,7 +59,7 @@ const Form = ({ formValues, onChange, handleSwapCurrencies }: FormProps) => {
           id="fromCurrency"
           disabledCurrency={formValues.toCurrency}
           onChange={(e) => handleChange('fromCurrency', e)}
-          exchangeCurrencies={EXCHANGE_CURRENCIES}
+          exchangeCurrencies={exchangeCurrencies}
         />
       </div>
 
@@ -61,13 +77,15 @@ const Form = ({ formValues, onChange, handleSwapCurrencies }: FormProps) => {
           id="convertedValue"
           disabled
           type="number"
+          placeholder="Converted amount"
         />
+
         <Select
           value={formValues.toCurrency}
           id="toCurrency"
           onChange={(e) => handleChange('toCurrency', e)}
           disabledCurrency={formValues.fromCurrency}
-          exchangeCurrencies={EXCHANGE_CURRENCIES}
+          exchangeCurrencies={exchangeCurrencies}
         />
       </div>
     </form>

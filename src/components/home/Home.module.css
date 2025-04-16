@@ -4,19 +4,21 @@
   align-items: center;
   justify-content: center;
 
-  margin: 64px 0 0 0;
+  margin: 32px 0 0 0;
 }
 
 .exchange__wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
+  gap: 8px;
+
   min-width: 700px;
   width: 50%;
 }
 
 .currentExchangeRate {
-  padding: 10px;
+  padding: 16px;
   font-size: 24px;
   margin: 0;
 
@@ -28,6 +30,10 @@
   gap: 32px;
 
   margin: 16px 0 0 0;
+}
+
+.menu > button:hover {
+  border-bottom: 1px solid var(--white-main);
 }
 
 @media (max-width: 800px) {
@@ -44,6 +50,19 @@
 @media (max-width: 580px) {
   .exchange__wrapper {
     width: 100%;
+  }
+
+  .menu {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu > button {
+    width: 100%;
+
+    font-size: 0.9rem;
   }
 
   .swapBtn {

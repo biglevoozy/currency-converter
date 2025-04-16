@@ -15,8 +15,27 @@ export const api = {
 
       const data = (await response.json()) as Promise<RatesResponse>;
 
-      console.log('response from api', data);
       return data;
+    } catch (e: unknown) {
+      if (typeof e === 'string') {
+        console.error(e);
+      } else if (e instanceof Error) {
+        console.error(e.message);
+      }
+    }
+  },
+
+  getAvailableCurrencies: async () => {
+    try {
+      const response = await fetch(`${BASE_URL}latest/v1/currencies.json`);
+
+      if (!response.ok) throw new Error('Failed to fetch data');
+
+      const data = (await response.json()) as ArrayLike<string>;
+
+      const formedData = Object.entries<string>(data);
+
+      return formedData;
     } catch (e: unknown) {
       if (typeof e === 'string') {
         console.error(e);

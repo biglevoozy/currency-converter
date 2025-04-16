@@ -1,23 +1,38 @@
 .btn {
-  width: 40px;
-  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 100%;
   margin: 10px 15px;
 
   cursor: pointer;
 
   background-color: transparent;
   border: none;
+
+  color: var(--white-main);
+
+  font-size: 20px;
+
+  transition: all 0.6s ease;
+}
+
+.btn svg:hover {
+  transform: rotate(90deg);
+}
+
+.active {
+  border-bottom: 1px solid var(--white-main);
 }
 
 .btn svg {
   width: 100%;
   height: 100%;
+
+  transition: all 0.6s ease;
 }
 
 .btn svg > * {

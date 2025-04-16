@@ -4,12 +4,14 @@
 
   display: flex;
   flex-direction: column;
+  gap: 24px;
 
   position: relative;
 }
 
 .row {
   display: flex;
+  align-items: end;
 
   position: relative;
 }
@@ -17,13 +19,17 @@
 .swapBtn {
   position: absolute;
   z-index: 1;
-  right: -4px;
-  bottom: 34px;
+  right: 6px;
+  bottom: 20px;
 }
 
 @media (max-width: 580px) {
+  .form {
+    gap: 12px;
+  }
+
   .swapBtn {
-    bottom: 16px;
-    right: 3px;
+    bottom: 20px;
+    right: -3px;
   }
 }

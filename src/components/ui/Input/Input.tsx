@@ -6,19 +6,24 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   value: number | string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   id: string;
+  placeholder?: string;
 }
 
-const Input = ({ value, onChange, id, ...rest }: InputProps) => {
+const Input = ({ value, onChange, placeholder, id, ...rest }: InputProps) => {
   return (
     <>
-      <label htmlFor={id}></label>
-      <input
-        className={styles.input}
-        id={id}
-        value={value}
-        onChange={onChange}
-        {...rest}
-      />
+      <label htmlFor={id}>
+        {placeholder && (
+          <span className={styles.placeholder}>{placeholder}</span>
+        )}
+        <input
+          className={styles.input}
+          id={id}
+          value={value}
+          onChange={onChange}
+          {...rest}
+        />
+      </label>
     </>
   );
 };

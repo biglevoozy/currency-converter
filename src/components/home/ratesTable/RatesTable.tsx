@@ -5,9 +5,7 @@ import styles from './RatesTable.module.css';
 
 interface Rates {
   date: string;
-  rate: number;
-  from: string;
-  to: string;
+  currenciesRate: Record<string, number>;
 }
 
 interface RatesTableProps {
@@ -40,7 +38,9 @@ const RatesTable = ({
           {ratesList.map((rate) => (
             <tr className={styles.tableRow} key={rate.date}>
               <td className={styles.tableCell}> {rate.date}</td>
-              <td className={styles.tableCell}> {rate.rate.toFixed(5)}</td>
+              <td className={styles.tableCell}>
+                {rate.currenciesRate[toCurrency].toFixed(5)}
+              </td>
             </tr>
           ))}
         </tbody>

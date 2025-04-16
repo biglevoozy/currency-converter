@@ -11,3 +11,19 @@ export function getPreviousDays(
   }
   return arrayOfDays;
 }
+
+export function formatToMonthDay(date: string) {
+  const dateObj = new Date(date);
+  return dateObj.toLocaleString('default', {
+    day: '2-digit',
+    month: '2-digit',
+  });
+}
+
+export function getToday() {
+  const date = new Date();
+  return date.toLocaleDateString('default', {
+    day: '2-digit',
+    month: 'long',
+  });
+}

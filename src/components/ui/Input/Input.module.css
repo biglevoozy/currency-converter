@@ -1,7 +1,7 @@
 .input {
-  padding: 12px 24px;
+  padding: 6px 24px;
 
-  width: 100%;
+  width: 85%;
 
   border: 0;
   border-bottom: 1px solid var(--gray-700);
@@ -15,14 +15,31 @@
   font-family: var(--font-family);
 }
 
+.placeholder {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--gray-main);
+}
+
+.input:disabled {
+  color: var(--gray-main);
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
+@media (max-width: 800px) {
+  .input {
+    width: 80%;
+  }
+}
+
 @media (max-width: 580px) {
   .input {
+    width: 95%;
     font-size: 1.2rem;
 
     padding: 8px 8px;

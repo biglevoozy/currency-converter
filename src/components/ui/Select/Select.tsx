@@ -1,4 +1,4 @@
-import { ChangeEvent, SelectHTMLAttributes } from 'react';
+import { ChangeEvent, SelectHTMLAttributes, useState } from 'react';
 
 import styles from './Select.module.css';
 
@@ -6,7 +6,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   value: string;
   id: string;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-  exchangeCurrencies: string[];
+  exchangeCurrencies: [string, string][];
   disabledCurrency: string;
 }
 
@@ -17,27 +17,37 @@ const Select = ({
   exchangeCurrencies,
   disabledCurrency,
 }: SelectProps) => {
-  return (
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const className = isOpen ? 'label-opened' : 'label';
+
+  return Object.values(exchangeCurrencies).length > 0 ? (
     <>
-      <label className={styles.label} htmlFor={id}></label>
-      <select
-        className={styles.select}
-        value={value}
-        name={id}
-        id={id}
-        onChange={onChange}
-      >
-        {exchangeCurrencies.map((currency, index) => (
-          <option
-            key={index}
-            value={currency.toLowerCase()}
-            disabled={currency.toLowerCase() === disabledCurrency.toLowerCase()}
-          >
-            {currency.toUpperCase()}
-          </option>
-        ))}
-      </select>
+      <label className={styles[className]} htmlFor={id}>
+        <select
+          className={styles.select}
+          value={value}
+          name={id}
+          id={id}
+          onChange={onChange}
+          onMouseDown={() => setIsOpen(true)}
+          onBlur={() => setIsOpen(false)}
+        >
+          {exchangeCurrencies.map((currency) => (
+            <option
+              key={currency[0]}
+              value={currency[0].toLowerCase()}
+              disabled={
+                currency[0].toLowerCase() === disabledCurrency.toLowerCase()
+              }
+            >
+              {currency[0].toUpperCase()}
+            </option>
+          ))}
+        </select>
+      </label>
     </>
+  ) : (
+    ''
   );
 };
 
