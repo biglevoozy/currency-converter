@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+@import 'reset.css';
+
+:root {
+  --black-main: rgb(13, 13, 24);
+  --white-main: rgb(227, 227, 227);
+  --gray-main: rgb(164, 164, 174);
+  --gray-900: rgb(33, 33, 44);
+  --gray-700: rgb(68, 68, 74);
+
+  --font-size: 32px;
+  --font-family: 'Roboto Slab', sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  color: var(--white-main);
+
+  background-color: var(--black-main);
+}
