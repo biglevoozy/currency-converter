@@ -18,7 +18,8 @@
 .placeholder {
   font-size: 16px;
   font-weight: 400;
-  color: var(--gray-main);
+  font-family: var(--font-family);
+  color: var(--white-main);
 }
 
 .input:disabled {
@@ -44,5 +45,9 @@ input::-webkit-inner-spin-button {
 
     padding: 8px 8px;
     margin: 0 4px;
+  }
+
+  .placeholder {
+    font-size: 1rem;
   }
 }

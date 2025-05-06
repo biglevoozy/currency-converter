@@ -21,31 +21,29 @@ const Select = ({
   const className = isOpen ? 'label-opened' : 'label';
 
   return Object.values(exchangeCurrencies).length > 0 ? (
-    <>
-      <label className={styles[className]} htmlFor={id}>
-        <select
-          className={styles.select}
-          value={value}
-          name={id}
-          id={id}
-          onChange={onChange}
-          onMouseDown={() => setIsOpen(true)}
-          onBlur={() => setIsOpen(false)}
-        >
-          {exchangeCurrencies.map((currency) => (
-            <option
-              key={currency[0]}
-              value={currency[0].toLowerCase()}
-              disabled={
-                currency[0].toLowerCase() === disabledCurrency.toLowerCase()
-              }
-            >
-              {currency[0].toUpperCase()}
-            </option>
-          ))}
-        </select>
-      </label>
-    </>
+    <label className={styles[className]} htmlFor={id}>
+      <select
+        className={styles.select}
+        value={value}
+        name={id}
+        id={id}
+        onChange={onChange}
+        onMouseDown={() => setIsOpen(true)}
+        onBlur={() => setIsOpen(false)}
+      >
+        {exchangeCurrencies.map((currency) => (
+          <option
+            key={currency[0]}
+            value={currency[0].toLowerCase()}
+            disabled={
+              currency[0].toLowerCase() === disabledCurrency.toLowerCase()
+            }
+          >
+            {currency[0].toUpperCase()}
+          </option>
+        ))}
+      </select>
+    </label>
   ) : (
     ''
   );

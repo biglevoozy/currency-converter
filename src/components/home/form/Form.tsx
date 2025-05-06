@@ -22,7 +22,9 @@ const Form = ({
   onChange,
   handleSwapCurrencies,
 }: FormProps) => {
-  const convertedValue = (formValues.billsQuantity * exchangeRate).toFixed(2);
+  const convertedValue = exchangeRate
+    ? (formValues?.billsQuantity * exchangeRate).toFixed(2)
+    : 0;
 
   const [exchangeCurrencies, setExchangeCurrencies] = useState<
     [string, string][]
@@ -48,7 +50,7 @@ const Form = ({
       <div className={styles.row}>
         <Input
           id="billsQuantity"
-          value={formValues.billsQuantity}
+          value={formValues.billsQuantity || 0}
           onChange={(e) => handleChange('billsQuantity', e)}
           type="number"
           placeholder="Enter amount"
