@@ -1,12 +1,12 @@
 .form {
-  min-width: 300px;
-  width: 50%;
+  position: relative;
 
   display: flex;
   flex-direction: column;
   gap: 24px;
 
-  position: relative;
+  min-width: 300px;
+  width: 50%;
 }
 
 .row {
@@ -21,6 +21,21 @@
   z-index: 1;
   right: 6px;
   bottom: 20px;
+}
+
+.swapBtn > button {
+  margin: 10px 15px;
+
+  transition: all 0.6s ease;
+}
+
+.swapBtn > button svg {
+  stroke: var(--white-main);
+  stroke-width: 2px;
+}
+
+.swapBtn > button:hover svg {
+  transform: rotate(90deg);
 }
 
 @media (max-width: 580px) {

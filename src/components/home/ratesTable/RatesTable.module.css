@@ -1,20 +1,63 @@
 .tableWrapper {
   width: 100%;
-  margin: 24px 0 0 0;
+
+  opacity: 0;
+  animation: fade-in 0.5s forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination > button {
+  width: 40px;
+  height: 40px;
+
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.pagination > button:active {
+  transform: scale(1.05);
+}
+
+.pagination > button:hover > svg {
+  transform: unset;
+}
+
+.pagination > button > svg {
+  fill: var(--white-main);
+}
+
+.pages {
+  font-family: var(--font-family);
+  padding: 12px;
 }
 
 .exchangeHistory {
   width: 100%;
   border-collapse: collapse;
 
-  margin: 10px 0 0 0;
-
   table-layout: fixed;
+  margin: 4px 0 0 0;
 }
 
 .tableHeader {
   width: 100%;
   padding: 10px 0;
+
+  background-color: var(--gray-900);
 }
 
 .tableHeader th {
@@ -29,9 +72,13 @@
   font-weight: 300;
   padding: 8px 12px;
   border: 3px solid var(--gray-900);
+
+  background-color: var(--gray-800);
+
+  animation: fade-in 0.5s forwards;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 580px) {
   .tableCell {
     font-size: 20px;
     padding: 6px 3px;

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CartesianGrid,
   Line,
@@ -6,14 +7,11 @@ import {
   Tooltip,
   XAxis,
 } from 'recharts';
+import Button from 'src/components/ui/Button/Button';
+import { Rates } from 'src/types/rates.interface';
 import { formatToMonthDay } from 'src/utils/date';
 
 import styles from './Chart.module.css';
-
-interface Rates {
-  date: string;
-  currenciesRate: Record<string, number>;
-}
 
 interface ChartProps {
   ratesList: Rates[];
@@ -21,13 +19,32 @@ interface ChartProps {
 }
 
 const Chart = ({ ratesList, toCurrency }: ChartProps) => {
-  const reformedRatesList = ratesList.map((rate) => ({
+  const [amountOfDays, setAmountOfDays] = useState<number>(10);
+
+  const reformedRatesList = ratesList.slice(0, amountOfDays).map((rate) => ({
     date: formatToMonthDay(rate.date),
     value: rate.currenciesRate[toCurrency],
   }));
 
   return (
     <div className={styles.wrapper}>
+      <div className={styles.options}>
+        <Button
+          active={amountOfDays === 10}
+          onClick={() => setAmountOfDays(10)}
+          text="10 days"
+        />
+        <Button
+          active={amountOfDays === 50}
+          onClick={() => setAmountOfDays(50)}
+          text="50 days"
+        />
+        <Button
+          active={amountOfDays === 100}
+          onClick={() => setAmountOfDays(100)}
+          text="100 days"
+        />
+      </div>
       <ResponsiveContainer height={400}>
         <LineChart data={reformedRatesList}>
           <CartesianGrid strokeDasharray="3 12" />

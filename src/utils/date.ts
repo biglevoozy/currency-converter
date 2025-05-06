@@ -27,3 +27,11 @@ export function getToday() {
     month: 'long',
   });
 }
+
+export function formatToDDMMYYY(date: string) {
+  return new Date(date).toLocaleDateString('en-GB', {
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+  });
+}

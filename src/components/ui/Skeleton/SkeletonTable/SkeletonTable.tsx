@@ -1,4 +1,4 @@
-import Heading from '../../Heading/Heading';
+import Heading from 'src/components/ui/Heading/Heading';
 
 import styles from './SkeletonTable.module.css';
 

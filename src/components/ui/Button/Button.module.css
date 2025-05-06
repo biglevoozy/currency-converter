@@ -6,26 +6,18 @@
   align-items: center;
   justify-content: center;
 
-  margin: 10px 15px;
-
   cursor: pointer;
 
   background-color: transparent;
   border: none;
 
   color: var(--white-main);
-
+  font-family: var(--font-family);
   font-size: 20px;
-
-  transition: all 0.6s ease;
 }
 
-.btn svg:hover {
-  transform: rotate(90deg);
-}
-
-.active {
-  border-bottom: 1px solid var(--white-main);
+.btn.active::after {
+  width: 105%;
 }
 
 .btn svg {
@@ -33,16 +25,4 @@
   height: 100%;
 
   transition: all 0.6s ease;
-}
-
-.btn svg > * {
-  stroke: var(--white-main);
-  stroke-width: 3px;
-}
-
-@media (max-width: 580px) {
-  .btn {
-    width: 38px;
-    height: 38px;
-  }
 }

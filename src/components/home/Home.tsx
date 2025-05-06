@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import { useEffect } from 'react';
 import { api } from 'src/api/api';
+import Button from 'src/components/ui/Button/Button';
+import Heading from 'src/components/ui/Heading/Heading';
 import { FormValues } from 'src/types/form.interface';
+import { Rates } from 'src/types/rates.interface';
 import { getPreviousDays, getToday } from 'src/utils/date';
-
-import Button from '../ui/Button/Button';
-import Heading from '../ui/Heading/Heading';
 
 import Chart from './chart/Chart';
 import Form from './form/Form';
@@ -13,12 +13,7 @@ import RatesTable from './ratesTable/RatesTable';
 
 import styles from './Home.module.css';
 
-const PREVIOUS_DAYS = getPreviousDays(10, 0);
-
-interface Rates {
-  date: string;
-  currenciesRate: Record<string, number>;
-}
+const PREVIOUS_DAYS = getPreviousDays(100, 0);
 
 const Home = () => {
   const [ratesList, setRatesList] = useState<Rates[]>([]);
@@ -51,8 +46,8 @@ const Home = () => {
   const handleSwapCurrencies = useCallback(() => {
     setFormValues((prevState) => ({
       ...prevState,
-      toCurrency: prevState.fromCurrency,
       fromCurrency: prevState.toCurrency,
+      toCurrency: prevState.fromCurrency,
     }));
   }, []);
 
@@ -67,14 +62,12 @@ const Home = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Heading headingTag="h1" text="Currency converter" />
+      <Heading headingTag="h1" text="Convert your currencies" />
       <div className={styles.exchange__wrapper}>
-        <div>
-          <p className={styles.currentExchangeRate}>
-            On {getToday()}, 1 {formValues.fromCurrency.toUpperCase()} equals to{' '}
-            {exchangeRate ? exchangeRate.toFixed(2) : '0.00'}{' '}
-            {formValues.toCurrency.toUpperCase()}
-          </p>
+        <div className={styles.currentExchangeRate}>
+          {`On ${getToday()}, 1 ${formValues.fromCurrency.toUpperCase()} →
+            ${exchangeRate ? exchangeRate.toFixed(2) : '0.00'}
+            ${formValues.toCurrency.toUpperCase()}`}
         </div>
 
         <Form
@@ -84,15 +77,22 @@ const Home = () => {
           handleSwapCurrencies={handleSwapCurrencies}
         />
 
+        <div className={styles.heading}>
+          <Heading
+            headingTag="h2"
+            text={`History of exchanges rate from ${formValues.fromCurrency.toUpperCase()} to ${formValues.toCurrency.toUpperCase()}`}
+          />
+        </div>
+
         <div className={styles.menu}>
           <Button
             active={activeTab === 'tableRates'}
-            text="Table of exchange rates"
+            text="Table view"
             onClick={() => setActiveTab('tableRates')}
           />
           <Button
             active={activeTab === 'chart'}
-            text="Chart of exchange rates"
+            text="Chart view"
             onClick={() => setActiveTab('chart')}
           />
         </div>
@@ -101,7 +101,7 @@ const Home = () => {
           <RatesTable
             fromCurrency={formValues.fromCurrency}
             toCurrency={formValues.toCurrency}
-            ratesList={ratesList}
+            rawRatesList={ratesList}
           />
         )}
 
